@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Icon.gd" type="Script" id=1]
+[ext_resource path="res://ground1.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 416, 30 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 174.25, 34.625 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 452, 99 )
+script = ExtResource( 1 )
+jump_height = 150.0
+jump_time = 0.45
+jump_scaler = Vector3( 2, 0.4, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="Icon" type="Sprite" parent="KinematicBody2D"]
+texture = ExtResource( 3 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 22, -18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 492, 497 )
+shape = SubResource( 2 )
+
+[node name="Ground1" type="Sprite" parent="StaticBody2D"]
+position = Vector2( 309, 216 )
+scale = Vector2( 1.0875, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( 331, 193 )
+shape = SubResource( 3 )
+
+[node name="Ground1" type="Sprite" parent="StaticBody2D2"]
+position = Vector2( 516, 480 )
+scale = Vector2( 2.60625, 0.19375 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( 114, 67 )
+
+[node name="Ground1" type="Sprite" parent="StaticBody2D3"]
+position = Vector2( 726, 335 )
+scale = Vector2( 1.0875, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2( 725, 330 )
+shape = SubResource( 3 )
