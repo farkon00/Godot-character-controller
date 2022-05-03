@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-export var jump_height: float = 300
-export var jump_time: float = 0.5
-export var jump_scaler: Vector3 = Vector3(2, 0.3, 5)
+export var jump_height: float = 150
+export var jump_time: float = 0.45
+export var jump_scaler: Vector3 = Vector3(2, 0.4, 3)
 
 export var min_gravity: float = 210
 export var gravity_incr: float = 1.7
