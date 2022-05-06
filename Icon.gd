@@ -31,37 +31,20 @@ var gravity_mult: float = 1
 var jump_req_left: float = 0
 
 func check_move(delta: float) -> void:
+	var inputXDir = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
+	var xDir = sign(move_vel)
 	var air_mult: float = 1
 	if not on_floor:
 		air_mult = in_air_move_mult
-	if Input.is_action_pressed("ui_left"):
-		if move_vel >= 0:
-			move_vel = -start_move_vel
-		elif move_vel > -max_move:
-			move_vel -= move_incr * delta
-		left_released = false
-		right_released = false
-	elif right_released:
-		move_vel -= move_decr * delta
-		if move_vel < 0:
+	if inputXDir != 0:
+		if move_vel == 0 or (xDir != sign(inputXDir)):
+			move_vel = inputXDir * start_move_vel
+		elif move_vel * inputXDir < max_move:
+			move_vel = move_vel + (move_incr * delta * inputXDir)
+	elif move_vel != 0:
+		move_vel = move_vel - (move_decr * delta * xDir)
+		if sign(move_vel) != xDir:
 			move_vel = 0
-			right_released = false
-	if Input.is_action_just_released("ui_left"):
-		left_released = true
-	if Input.is_action_pressed("ui_right"):
-		if move_vel <= 0:
-			move_vel = start_move_vel
-		elif move_vel < max_move:
-			move_vel += move_incr * delta
-		left_released = false
-		right_released = false
-	elif left_released:
-		move_vel += move_decr * delta
-		if move_vel > 0:
-			move_vel = 0
-			left_released = false
-	if Input.is_action_just_released("ui_right"):
-		right_released = true
 	
 	var	__ = move_and_collide(Vector2(move_vel * delta * air_mult, 0))
 
